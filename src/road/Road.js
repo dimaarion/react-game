@@ -1,3 +1,4 @@
+import Earth from "./Earth";
 export default function Road(p5) {
-  return p5.fill(0, 255, 255);
+  return Earth(p5);
 }
