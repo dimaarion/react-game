@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Sketch from "react-p5";
-
+import Road from "/Road";
 export default class App extends Component {
   setup = (p5, canvasParentRef) => {
     p5.createCanvas(window.innerWidth, window.innerHeight).parent(
@@ -9,8 +9,8 @@ export default class App extends Component {
     p5.frameRate(this.fr);
     // use parent to render canvas in this ref (without that p5 render this canvas outside your component)
   };
-  draw = p5 => {
-    p5.fill(234, 31, 81);
+  draw = (p5) => {
+    p5.fill(234, 31, Road());
     p5.noStroke();
     p5.rect(50, 50, 250, 250);
     p5.fill(255);
