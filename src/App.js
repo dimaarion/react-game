@@ -3,6 +3,7 @@ import Sketch from "react-p5";
 import Road from "./road/Road";
 import scena from "./db/scena.json";
 import ErathMap from "./road/ErathMap";
+import { newArrayDrav } from "./action";
 export default function App() {
   let imgErath;
   let imgGrass;
@@ -11,12 +12,16 @@ export default function App() {
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/YKz9-earth.png"
     );
     imgGrass = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/xI3H-grass.png"
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/Q3A9-grass1.png"
     );
   };
   const setup = (p5, canvasParentRef) => {
-    p5.createCanvas(100 * 50, 10 * 50).parent(canvasParentRef);
+    p5.createCanvas(
+      scena.width * scena.tilewidth,
+      scena.height * scena.tileheight
+    ).parent(canvasParentRef);
     ErathMap({ p5: p5, imgErath: imgErath, imgGrass: imgGrass });
+    console.log(newArrayDrav(scena.tilesets));
   };
 
   const draw = (p5) => {};

@@ -6,13 +6,13 @@ export const arrayCount = (count) => {
   return arr;
 };
 
-export const taitlDraw = (p5, img, arr, w, h) => {
-  let col = 0;
-  let row = 0;
-  let arrNew = [{}];
-  let x = 0;
-  let y = 0;
+export const newArrayDrav = (arr, params) => {
+  let a = [];
   for (let i = 0; i < arr.length; i++) {
-    p5.image(img, i * w, 0, w, 50, i * w, 0, w, 50);
+    a[i] = {
+      firstgid: arr[i].firstgid,
+      source: arr[i].source.split("/")[4].replace("tsx", "png")
+    };
   }
+  return a;
 };
