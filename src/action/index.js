@@ -13,6 +13,6 @@ export const taitlDraw = (p5, img, arr, w, h) => {
   let x = 0;
   let y = 0;
   for (let i = 0; i < arr.length; i++) {
-    p5.image(img, 0, 0, 50, 50, 0, 0, 50, 50);
+    p5.image(img, i * w, 0, w, 50, i * w, 0, w, 50);
   }
 };
