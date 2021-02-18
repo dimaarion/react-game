@@ -7,8 +7,11 @@
   "dependencies": {
     "react": "16.12.0",
     "react-dom": "16.12.0",
+    "react-isometric-tilemap": "1.0.0",
     "react-p5": "1.3.2",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "react-tile-map": "0.3.2",
+    "tilemap": "0.1.0"
   },
   "devDependencies": {
     "typescript": "3.8.3"
