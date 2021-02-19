@@ -9,7 +9,7 @@ export default function App() {
   let imgGrass;
   const preload = (p5) => {
     imgErath = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/YKz9-earth.png"
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/jRLV-earths.png"
     );
     imgGrass = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/Q3A9-grass1.png"

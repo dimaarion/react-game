@@ -6,12 +6,12 @@ export default function EarthMap(props) {
     if (layer.type === "tilelayer") {
       layer.data.map((d, i) => {
         if (d > 0) {
-          if (d === 3) {
+          if (d === 2) {
             props.p5.image(
               props.imgErath,
               col * scena.tilewidth,
               row * scena.tileheight,
-              scena.tilewidth,
+              150,
               scena.tileheight
             );
           }
