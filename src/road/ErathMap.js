@@ -3,20 +3,29 @@ export default function EarthMap(props) {
   let col = 0;
   let row = 0;
   scena.layers.map((layer) => {
+    //Перенести в функцию
     if (layer.type === "tilelayer") {
       layer.data.map((d, i) => {
         if (d > 0) {
-          if (d === 2) {
+          /* if (d === 1) {
             props.p5.image(
               props.imgErath,
               col * scena.tilewidth,
               row * scena.tileheight,
-              150,
-              scena.tileheight
+              1024,
+              900
+            );
+          }*/
+          if (d === 113) {
+            props.p5.image(
+              props.imgGrass,
+              col * scena.tilewidth,
+              row * scena.tileheight,
+              500,
+              250
             );
           }
-
-          if (d === 1) {
+          /* if (d === 1) {
             props.p5.image(
               props.imgGrass,
               col * scena.tilewidth,
@@ -24,7 +33,7 @@ export default function EarthMap(props) {
               scena.tilewidth,
               scena.tileheight
             );
-          }
+          }*/
         }
 
         col++;
