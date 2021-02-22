@@ -7,7 +7,7 @@ export default function EarthMap(props) {
     if (layer.type === "tilelayer") {
       layer.data.map((d, i) => {
         if (d > 0) {
-          /* if (d === 1) {
+          if (d === 1) {
             props.p5.image(
               props.imgErath,
               col * scena.tilewidth,
@@ -15,27 +15,8 @@ export default function EarthMap(props) {
               1024,
               900
             );
-          }*/
-          if (d === 113) {
-            props.p5.image(
-              props.imgGrass,
-              col * scena.tilewidth,
-              row * scena.tileheight,
-              500,
-              250
-            );
           }
-          /* if (d === 1) {
-            props.p5.image(
-              props.imgGrass,
-              col * scena.tilewidth,
-              row * scena.tileheight,
-              scena.tilewidth,
-              scena.tileheight
-            );
-          }*/
         }
-
         col++;
         if (col > scena.width - 1) {
           col = 0;
