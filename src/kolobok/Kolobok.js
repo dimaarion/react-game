@@ -1,10 +1,16 @@
 export default function Kolobok(props) {
-  return (
-    props.p5.image(props.imgKolobok, 100, 100, 100, 100),
-    props.scena.layers.map((x) => {
-      console.log(x.objects);
-
-      //x.map((o) => {});
-    })
-  );
+  props.scena.layers
+    .filter((x) => x.type === "objectgroup")
+    .map((x2, i) => {
+      if (x2.objects[i].type === "users") {
+        props.p5.image(
+          props.imgKolobok,
+          x2.objects[i].x,
+          x2.objects[i].y,
+          x2.objects[i].width,
+          x2.objects[i].height
+        );
+        console.log(x2.objects[i]);
+      }
+    });
 }
