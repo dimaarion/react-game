@@ -10,7 +10,6 @@ export default function Kolobok(props) {
           x2.objects[i].width,
           x2.objects[i].height
         );
-        console.log(x2.objects[i]);
       }
     });
 }

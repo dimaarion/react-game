@@ -1,5 +1,5 @@
 import scena from "../db/scena.json";
-export default function EarthMap(props) {
+export default function EarthMap(p5, props) {
   let col = 0;
   let row = 0;
   scena.layers.map((layer) => {
@@ -8,11 +8,11 @@ export default function EarthMap(props) {
       layer.data.map((d, i) => {
         if (d > 0) {
           if (d === 1) {
-            props.p5.image(
+            p5.image(
               props.imgErath,
               col * scena.tilewidth,
               row * scena.tileheight,
-              1024,
+              2024,
               900
             );
           }
