@@ -5,40 +5,49 @@ import scena from "./db/scena.json";
 import ErathMap from "./road/ErathMap";
 import { kolobokGoRight } from "./action";
 export default function App() {
-  let imgErath;
-  let imgKolobok;
+  let imgErath, imgKolobokFas, imgKolobokLeft;
+
   const preload = (p5) => {
     imgErath = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/gBkC-scena.png"
     );
-    imgKolobok = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/WgVk-kolobok.png"
+    imgKolobokFas = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/4mNG-kolobokFas.png"
+    );
+    imgKolobokLeft = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/Bjz--kolobokLeft.png"
     );
   };
-
+  const props = {
+    scena: scena,
+    imgErath: imgErath,
+    imgKolobokFas: imgKolobokFas,
+    presed: 0
+  };
   const setup = (p5, canvasParentRef) => {
-    const props = {
+    const propsStart = {
       p5: p5,
       scena: scena,
       imgErath: imgErath,
-      imgKolobok: imgKolobok,
-      presed: 0
+      imgKolobokFas: imgKolobokFas,
+      imgKolobokLeft: imgKolobokLeft
     };
-    p5.createCanvas(
-      scena.width * scena.tilewidth,
-      scena.height * scena.tileheight
-    ).parent(canvasParentRef);
+    p5.createCanvas(p5.windowWidth, scena.height * scena.tileheight).parent(
+      canvasParentRef
+    );
 
-    ErathMap(props);
-    kolobok(props);
+    ErathMap(p5, propsStart);
+    kolobok(p5, propsStart);
   };
+  let speed = 0;
   let presed = 0;
+  let spedKadr = 0;
   const draw = (p5) => {
-    kolobokGoRight({
-      p5: p5,
+    ErathMap(p5, { imgErath: imgErath });
+    kolobok(p5, {
+      imgKolobokFas: imgKolobokFas,
       presed: presed,
-      scena: scena,
-      imgKolobok: imgKolobok
+      spedKadr: spedKadr
     });
   };
   const keyPressed = (p5) => {
