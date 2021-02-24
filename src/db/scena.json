@@ -65,9 +65,9 @@
                 {
                  "height":909.090909090909,
                  "id":2,
-                 "name":"",
+                 "name":"home",
                  "rotation":0,
-                 "type":"",
+                 "type":"barier",
                  "visible":true,
                  "width":581.818181818182,
                  "x":6.06060606060606,
@@ -98,9 +98,9 @@
                 {
                  "height":260.606060606061,
                  "id":6,
-                 "name":"",
+                 "name":"pits",
                  "rotation":0,
-                 "type":"",
+                 "type":"barier",
                  "visible":true,
                  "width":227.272727272727,
                  "x":1381.81818181818,

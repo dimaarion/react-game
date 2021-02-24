@@ -4,6 +4,7 @@ import kolobok from "./kolobok/Kolobok";
 import scena from "./db/scena.json";
 import image from "./db/image.json";
 import ErathMap from "./road/ErathMap";
+import Colige from "./Colige";
 import { kolobokGoRight } from "./action";
 export default function App() {
   let imgErath,
@@ -15,7 +16,8 @@ export default function App() {
     imgKolobokJamp,
     imgKolobokJampInvert,
     imgKolobokRightInvert,
-    kolobokY;
+    kolobokY,
+    homeParms;
 
   const preload = (p5) => {
     imgErath = p5.loadImage(
@@ -72,6 +74,21 @@ export default function App() {
           kolobokY = x2.objects[i].y;
         }
       });
+
+    scena.layers
+      .filter((x) => x.name === "Home")
+      .map((x2) =>
+        x2.objects
+          .filter((x3) => x3.name === "home")
+          .map((x4) => {
+            homeParms = {
+              x: x4.x,
+              y: x4.y,
+              width: x4.width,
+              height: x4.height
+            };
+          })
+      );
   };
   let speed = 0;
   let presed = 0;
@@ -94,7 +111,8 @@ export default function App() {
       presedTop: presedTop,
       spedKadr: spedKadr,
       direction: direction,
-      kolobokY: kolobokY
+      kolobokY: kolobokY,
+      homeParms: homeParms
     });
   };
   const keyPressed = (p5) => {

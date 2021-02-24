@@ -1,7 +1,9 @@
 import scena from "../db/scena.json";
 import image from "../db/image.json";
 import Home from "../barrier/Home";
+import Colige from "../Colige";
 export default function Kolobok(p5, props) {
+  let goLeft;
   let imgArr = [
     props.imgKolobokFas,
     props.imgKolobokRight,
@@ -17,7 +19,7 @@ export default function Kolobok(p5, props) {
   letimgArrDirect = ["noImage", props.imgKolobokFasInvert, props.imgKolobokFas];
   let speed = 40;
   let countJamp = 0;
-  Home(p5, props);
+
   scena.layers
     .filter((x) => x.type === "objectgroup")
     .map((x2, i) => {
@@ -47,13 +49,32 @@ export default function Kolobok(p5, props) {
             image.imgAnimation.start = 0;
           }
           p5.frameRate(image.imgAnimation.speed);
-          p5.image(
-            imgArrInvert[image.imgAnimation.start],
+          goLeft = Colige(p5).collideRectRect(
+            props.homeParms.x,
+            props.homeParms.y,
+            props.homeParms.width,
+            props.homeParms.height,
             (x2.objects[i].x -= speed),
             x2.objects[i].y,
             x2.objects[i].width,
             x2.objects[i].height
           );
+          console.log(goLeft);
+          goLeft
+            ? p5.image(
+                imgArrInvert[image.imgAnimation.start],
+                props.homeParms.width,
+                x2.objects[i].y,
+                x2.objects[i].width,
+                x2.objects[i].height
+              )
+            : p5.image(
+                imgArrInvert[image.imgAnimation.start],
+                (x2.objects[i].x -= speed),
+                x2.objects[i].y,
+                x2.objects[i].width,
+                x2.objects[i].height
+              );
         }
 
         if (props.presed === 0 && props.presedTop !== 3) {
