@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
+import Colige from "./Colige";
 import App from "./App";
 
 const rootElement = document.getElementById("root");

@@ -2,6 +2,7 @@ import React from "react";
 import Sketch from "react-p5";
 import kolobok from "./kolobok/Kolobok";
 import scena from "./db/scena.json";
+import image from "./db/image.json";
 import ErathMap from "./road/ErathMap";
 import { kolobokGoRight } from "./action";
 export default function App() {
@@ -12,7 +13,9 @@ export default function App() {
     imgKolobokFasInvert,
     imgKolobokLeftInvert,
     imgKolobokJamp,
-    imgKolobokRightInvert;
+    imgKolobokJampInvert,
+    imgKolobokRightInvert,
+    kolobokY;
 
   const preload = (p5) => {
     imgErath = p5.loadImage(
@@ -39,6 +42,9 @@ export default function App() {
     imgKolobokJamp = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/ZAhk-koloborJamp.png"
     );
+    imgKolobokJampInvert = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/uWKu-koloborJampInvert.png"
+    );
   };
   const props = {
     scena: scena,
@@ -59,12 +65,20 @@ export default function App() {
     );
 
     ErathMap(p5, propsStart);
-    // kolobok(p5, propsStart);
+    scena.layers
+      .filter((x) => x.type === "objectgroup")
+      .map((x2, i) => {
+        if (x2.name === "kolobok") {
+          kolobokY = x2.objects[i].y;
+        }
+      });
   };
   let speed = 0;
   let presed = 0;
   let presedTop = 0;
   let spedKadr = 0;
+  let direction = 2;
+
   const draw = (p5) => {
     ErathMap(p5, { imgErath: imgErath });
     kolobok(p5, {
@@ -75,19 +89,28 @@ export default function App() {
       imgKolobokLeftInvert: imgKolobokLeftInvert,
       imgKolobokRightInvert: imgKolobokRightInvert,
       imgKolobokJamp: imgKolobokJamp,
+      imgKolobokJampInvert: imgKolobokJampInvert,
       presed: presed,
       presedTop: presedTop,
-      spedKadr: spedKadr
+      spedKadr: spedKadr,
+      direction: direction,
+      kolobokY: kolobokY
     });
   };
   const keyPressed = (p5) => {
     if (p5.keyCode === p5.LEFT_ARROW) {
       presed = 1;
+      direction = 1;
+      //presedTop = 0;
     } else if (p5.keyCode === p5.RIGHT_ARROW) {
       presed = 2;
+      direction = 2;
+      //presedTop = 0;
     }
     if (p5.keyCode === 38) {
       presedTop = 3;
+      image.imgAnimation.startJamp = 0;
+      presed = 0;
     }
   };
   const keyReleased = (p5) => {
@@ -95,9 +118,6 @@ export default function App() {
       presed = 0;
     } else if (p5.keyCode === p5.RIGHT_ARROW) {
       presed = 0;
-    }
-    if (p5.keyCode === 38) {
-      presedTop = 0;
     }
   };
   return (
