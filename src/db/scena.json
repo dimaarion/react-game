@@ -96,15 +96,15 @@
          "name":"Pits",
          "objects":[
                 {
-                 "height":260.606060606061,
+                 "height":196.969696969697,
                  "id":6,
                  "name":"pits",
                  "rotation":0,
                  "type":"barier",
                  "visible":true,
-                 "width":227.272727272727,
-                 "x":1381.81818181818,
-                 "y":630.30303030303
+                 "width":87.878787878788,
+                 "x":1469.69696969697,
+                 "y":660.606060606061
                 }],
          "opacity":1,
          "type":"objectgroup",

@@ -4,6 +4,7 @@ import kolobok from "./kolobok/Kolobok";
 import scena from "./db/scena.json";
 import image from "./db/image.json";
 import ErathMap from "./road/ErathMap";
+import Home from "./barrier/Home";
 import Colige from "./Colige";
 import { kolobokGoRight } from "./action";
 export default function App() {
@@ -17,7 +18,8 @@ export default function App() {
     imgKolobokJampInvert,
     imgKolobokRightInvert,
     kolobokY,
-    homeParms;
+    homeParms,
+    pitsParams;
 
   const preload = (p5) => {
     imgErath = p5.loadImage(
@@ -66,7 +68,6 @@ export default function App() {
       canvasParentRef
     );
 
-    ErathMap(p5, propsStart);
     scena.layers
       .filter((x) => x.type === "objectgroup")
       .map((x2, i) => {
@@ -89,7 +90,23 @@ export default function App() {
             };
           })
       );
+
+    scena.layers
+      .filter((x) => x.name === "Pits")
+      .map((x2) =>
+        x2.objects
+          .filter((x3) => x3.name === "pits")
+          .map((x4) => {
+            pitsParams = {
+              x: x4.x,
+              y: x4.y,
+              width: x4.width,
+              height: x4.height
+            };
+          })
+      );
   };
+
   let speed = 0;
   let presed = 0;
   let presedTop = 0;
@@ -97,7 +114,7 @@ export default function App() {
   let direction = 2;
 
   const draw = (p5) => {
-    ErathMap(p5, { imgErath: imgErath });
+    ErathMap(p5, { imgErath: imgErath, presed: presed });
     kolobok(p5, {
       imgKolobokFas: imgKolobokFas,
       imgKolobokLeft: imgKolobokLeft,
@@ -112,7 +129,12 @@ export default function App() {
       spedKadr: spedKadr,
       direction: direction,
       kolobokY: kolobokY,
-      homeParms: homeParms
+      homeParms: homeParms,
+      pitsParams: pitsParams
+    });
+    Home(p5, {
+      params: homeParms,
+      presed: presed
     });
   };
   const keyPressed = (p5) => {

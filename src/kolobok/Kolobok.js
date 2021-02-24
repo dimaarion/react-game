@@ -4,6 +4,7 @@ import Home from "../barrier/Home";
 import Colige from "../Colige";
 export default function Kolobok(p5, props) {
   let goLeft;
+  let pits;
   let imgArr = [
     props.imgKolobokFas,
     props.imgKolobokRight,
@@ -24,6 +25,27 @@ export default function Kolobok(p5, props) {
     .filter((x) => x.type === "objectgroup")
     .map((x2, i) => {
       if (x2.name === "kolobok") {
+        pits = Colige(p5).collideRectRect(
+          props.pitsParams.x,
+          props.pitsParams.y,
+          props.pitsParams.width,
+          props.pitsParams.height,
+          x2.objects[i].x,
+          x2.objects[i].y,
+          x2.objects[i].width,
+          x2.objects[i].height
+        );
+        goLeft = Colige(p5).collideRectRect(
+          props.homeParms.x,
+          props.homeParms.y,
+          props.homeParms.width,
+          props.homeParms.height,
+          x2.objects[i].x,
+          x2.objects[i].y,
+          x2.objects[i].width,
+          x2.objects[i].height
+        );
+
         if (x2.objects[i].y < props.kolobokY) {
           props.presed = 0;
         }
@@ -34,13 +56,23 @@ export default function Kolobok(p5, props) {
             image.imgAnimation.start = 0;
           }
           p5.frameRate(image.imgAnimation.speed);
-          p5.image(
-            imgArr[image.imgAnimation.start],
-            (x2.objects[i].x += speed),
-            x2.objects[i].y,
-            x2.objects[i].width,
-            x2.objects[i].height
-          );
+          if (pits) {
+            p5.image(
+              props.imgKolobokJamp,
+              x2.objects[i].x + 100,
+              x2.objects[i].y + 50,
+              x2.objects[i].width,
+              x2.objects[i].height
+            );
+          } else {
+            p5.image(
+              imgArr[image.imgAnimation.start],
+              (x2.objects[i].x += speed),
+              x2.objects[i].y,
+              x2.objects[i].width,
+              x2.objects[i].height
+            );
+          }
         }
         if (props.presed === 1) {
           presedTop = 0;
@@ -49,32 +81,23 @@ export default function Kolobok(p5, props) {
             image.imgAnimation.start = 0;
           }
           p5.frameRate(image.imgAnimation.speed);
-          goLeft = Colige(p5).collideRectRect(
-            props.homeParms.x,
-            props.homeParms.y,
-            props.homeParms.width,
-            props.homeParms.height,
-            (x2.objects[i].x -= speed),
-            x2.objects[i].y,
-            x2.objects[i].width,
-            x2.objects[i].height
-          );
-
-          goLeft
-            ? p5.image(
-                imgArrInvert[0],
-                (x2.objects[i].x += 100),
-                x2.objects[i].y,
-                x2.objects[i].width,
-                x2.objects[i].height
-              )
-            : p5.image(
-                imgArrInvert[image.imgAnimation.start],
-                (x2.objects[i].x -= speed),
-                x2.objects[i].y,
-                x2.objects[i].width,
-                x2.objects[i].height
-              );
+          if (goLeft) {
+            p5.image(
+              imgArrInvert[image.imgAnimation.start],
+              x2.objects[i].x,
+              x2.objects[i].y,
+              x2.objects[i].width,
+              x2.objects[i].height
+            );
+          } else {
+            p5.image(
+              imgArrInvert[image.imgAnimation.start],
+              (x2.objects[i].x -= speed),
+              x2.objects[i].y,
+              x2.objects[i].width,
+              x2.objects[i].height
+            );
+          }
         }
 
         if (props.presed === 0 && props.presedTop !== 3) {

@@ -5,5 +5,9 @@
     "start": 0,
     "startJamp": 0,
     "jampMax": 5
+  },
+  "imgMaps": {
+    "speed": 16,
+    "start": 0
   }
 }
