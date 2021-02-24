@@ -63,7 +63,7 @@ export default function Kolobok(p5, props) {
           goLeft
             ? p5.image(
                 imgArrInvert[0],
-                props.homeParms.width + 100,
+                (x2.objects[i].x += 100),
                 x2.objects[i].y,
                 x2.objects[i].width,
                 x2.objects[i].height
