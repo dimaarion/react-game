@@ -5,6 +5,9 @@ export default function EarthMap(p5, props) {
   let row = 0;
   if (props.presed === 2) {
     image.imgMaps.start -= image.imgMaps.speed;
+    if (props.pits) {
+      image.imgMaps.start;
+    }
   }
   if (props.presed === 1) {
     image.imgMaps.start += image.imgMaps.speed;

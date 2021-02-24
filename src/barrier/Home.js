@@ -11,4 +11,6 @@ export default function Home(p5, props) {
       props.params.x = 0;
     }
   }
+  p5.fill(70);
+  p5.rect(props.params.x, 500, 100, 100);
 }

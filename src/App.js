@@ -5,6 +5,7 @@ import scena from "./db/scena.json";
 import image from "./db/image.json";
 import ErathMap from "./road/ErathMap";
 import Home from "./barrier/Home";
+import Pits from "./barrier/Pits";
 import Colige from "./Colige";
 import { kolobokGoRight } from "./action";
 export default function App() {
@@ -114,7 +115,6 @@ export default function App() {
   let direction = 2;
 
   const draw = (p5) => {
-    ErathMap(p5, { imgErath: imgErath, presed: presed });
     kolobok(p5, {
       imgKolobokFas: imgKolobokFas,
       imgKolobokLeft: imgKolobokLeft,
@@ -124,6 +124,7 @@ export default function App() {
       imgKolobokRightInvert: imgKolobokRightInvert,
       imgKolobokJamp: imgKolobokJamp,
       imgKolobokJampInvert: imgKolobokJampInvert,
+      imgErath: imgErath,
       presed: presed,
       presedTop: presedTop,
       spedKadr: spedKadr,
@@ -131,10 +132,6 @@ export default function App() {
       kolobokY: kolobokY,
       homeParms: homeParms,
       pitsParams: pitsParams
-    });
-    Home(p5, {
-      params: homeParms,
-      presed: presed
     });
   };
   const keyPressed = (p5) => {
