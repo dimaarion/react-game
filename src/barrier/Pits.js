@@ -3,15 +3,15 @@ import image from "../db/image.json";
 import Colige from "../Colige";
 export default function Pits(p5, props) {
   if (props.presed === 2) {
-    if (props.pits) {
-      props.params.x;
+    if (props.goLeft) {
+      props.params.x += 1;
     } else {
       props.params.x -= image.imgMaps.speed;
     }
   }
   if (props.presed === 1) {
     if (props.goLeft) {
-      props.params.x;
+      props.params.x -= 1;
     } else {
       props.params.x += image.imgMaps.speed;
     }
