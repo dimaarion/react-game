@@ -2,6 +2,7 @@ import scena from "../db/scena.json";
 import image from "../db/image.json";
 import Home from "../barrier/Home";
 import Pits from "../barrier/Pits";
+import Lives from "../settings/Lives";
 import ErathMap from "../road/ErathMap";
 import Colige from "../Colige";
 export default function Kolobok(p5, props) {
@@ -68,6 +69,7 @@ export default function Kolobok(p5, props) {
           pits: pits,
           goLeft: goLeft
         });
+        Lives(p5, { pits: pits, test: props.test });
 
         if (x2.objects[i].y < props.kolobokY) {
           props.presed = 0;
@@ -80,6 +82,7 @@ export default function Kolobok(p5, props) {
           }
           p5.frameRate(image.imgAnimation.speed);
           if (pits) {
+            p5.storeItem(p5.getItem("test") + 1);
             img = props.imgKolobokJamp;
             x = x2.objects[i].x;
             y = x2.objects[i].y;
@@ -218,5 +221,6 @@ export default function Kolobok(p5, props) {
         //
       }
     });
+  console.log(p5.getItem("test"));
   p5.image(img, x, y, w, h);
 }

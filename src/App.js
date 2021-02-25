@@ -3,7 +3,7 @@ import Sketch from "react-p5";
 import kolobok from "./kolobok/Kolobok";
 import scena from "./db/scena.json";
 import image from "./db/image.json";
-import ErathMap from "./road/ErathMap";
+
 import Home from "./barrier/Home";
 import Pits from "./barrier/Pits";
 import Colige from "./Colige";
@@ -21,7 +21,8 @@ export default function App() {
     kolobokY,
     homeParms,
     pitsParams;
-
+  let test = 0;
+  let c = 0;
   const preload = (p5) => {
     imgErath = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/gBkC-scena.png"
@@ -132,7 +133,9 @@ export default function App() {
       direction: direction,
       kolobokY: kolobokY,
       homeParms: homeParms,
-      pitsParams: pitsParams
+      pitsParams: pitsParams,
+      test: test,
+      c: c
     });
   };
   const keyPressed = (p5) => {
