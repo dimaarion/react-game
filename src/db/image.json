@@ -9,5 +9,12 @@
   "imgMaps": {
     "speed": 16,
     "start": 0
-  }
+  },
+  "barier": [
+    {
+      "id": 1,
+      "name": "puddle",
+      "x": 0
+    }
+  ]
 }

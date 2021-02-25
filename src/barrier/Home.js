@@ -7,7 +7,7 @@ export default function Home(p5, props) {
   }
   if (props.presed === 1) {
     props.params.x += image.imgMaps.speed;
-    if (props.params.x > 0) {
+    if (props.params.x > 0 || props.goLeft) {
       props.params.x = 0;
     }
   }

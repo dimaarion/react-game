@@ -104,6 +104,7 @@ export default function App() {
               width: x4.width,
               height: x4.height
             };
+            image.barier.map((b) => (b.name === "puddle" ? (b.x = x4.x) : ""));
           })
       );
   };
