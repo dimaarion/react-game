@@ -69,7 +69,6 @@ export default function Kolobok(p5, props) {
           pits: pits,
           goLeft: goLeft
         });
-        Lives(p5, { pits: pits, test: props.test });
 
         if (x2.objects[i].y < props.kolobokY) {
           props.presed = 0;
@@ -221,6 +220,18 @@ export default function Kolobok(p5, props) {
         //
       }
     });
-  console.log(p5.getItem("test"));
+
+  Lives(p5, {
+    pits: pits,
+    test: props.test,
+    x: x,
+    y: y,
+    w: w,
+    h: h,
+    x2: props.pitsParams.x,
+    y2: props.pitsParams.y,
+    w2: props.pitsParams.width,
+    h2: props.pitsParams.height
+  });
   p5.image(img, x, y, w, h);
 }

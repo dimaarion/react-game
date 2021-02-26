@@ -1,5 +1,6 @@
 import { arrayCount } from "../action";
 import settings from "../db/settings.json";
+import Colige from "../Colige";
 export default function Lives(p5, props) {
   arrLive = [
     0,
@@ -89,9 +90,22 @@ export default function Lives(p5, props) {
       }
     });
   }
-
-  if (props.pits) {
+  let live = Colige().collideRectRect(
+    props.x,
+    props.y,
+    props.w,
+    props.h,
+    props.x2,
+    props.y2,
+    props.w2,
+    props.h2
+  );
+  let arrLives = [];
+  if (live === true) {
+    props.y = 0;
+  } else {
   }
-
-  arrayCount(p5.getItem("test")).map((l) => liv(p5, arrLive, 110 * l));
+  p5.fill(20);
+  p5.rect(props.x, props.y, props.w, props.h);
+  arrLives.map((l) => liv(p5, arrLive, 110 * l));
 }
