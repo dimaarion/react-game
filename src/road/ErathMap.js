@@ -12,7 +12,9 @@ export default function EarthMap(p5, props) {
       image.imgMaps.start = 0;
     }
   }
+
   p5.background(255);
+
   scena.layers.map((layer) => {
     if (layer.type === "tilelayer") {
       layer.data.map((d, i) => {

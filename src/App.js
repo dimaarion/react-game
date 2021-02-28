@@ -3,7 +3,7 @@ import Sketch from "react-p5";
 import kolobok from "./kolobok/Kolobok";
 import scena from "./db/scena.json";
 import image from "./db/image.json";
-
+import settings from "./db/settings.json";
 import Home from "./barrier/Home";
 import Pits from "./barrier/Pits";
 import Colige from "./Colige";
@@ -105,6 +105,9 @@ export default function App() {
               width: x4.width,
               height: x4.height
             };
+            settings.x = x4.x;
+            settings.y = x4.y;
+
             image.barier.map((b) => (b.name === "puddle" ? (b.x = x4.x) : ""));
           })
       );
@@ -159,6 +162,9 @@ export default function App() {
       presed = 0;
     } else if (p5.keyCode === p5.RIGHT_ARROW) {
       presed = 0;
+    }
+    if (p5.keyCode === 38) {
+      presedTopUp = 0;
     }
   };
   return (

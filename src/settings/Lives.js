@@ -90,22 +90,14 @@ export default function Lives(p5, props) {
       }
     });
   }
-  let live = Colige().collideRectRect(
-    props.x,
-    props.y,
-    props.w,
-    props.h,
-    props.x2,
-    props.y2,
-    props.w2,
-    props.h2
-  );
-  let arrLives = [];
-  if (live === true) {
-    props.y = 0;
-  } else {
+  let a = [1, 1, 1, 1, 1];
+  if (props.level) {
+    a.pop(1);
   }
-  p5.fill(20);
-  p5.rect(props.x, props.y, props.w, props.h);
-  arrLives.map((l) => liv(p5, arrLive, 110 * l));
+
+  a.map((d, i) => liv(p5, arrLive, 110 * i));
+  p5.push();
+  p5.noFill();
+  p5.rect(props.x, props.y, settings.width, settings.height);
+  p5.pop();
 }
