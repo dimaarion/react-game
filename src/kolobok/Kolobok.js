@@ -1,7 +1,6 @@
 import scena from "../db/scena.json";
 import image from "../db/image.json";
-import Home from "../barrier/Home";
-import Pits from "../barrier/Pits";
+import Earth from "../road/Earth";
 import Lives from "../settings/Lives";
 import ErathMap from "../road/ErathMap";
 import Colige from "../Colige";
@@ -9,7 +8,7 @@ import settings from "../db/settings.json";
 export default function Kolobok(p5, props) {
   let home = false;
   let barrier = false;
-  let homParams = { x: 0, y: 0, w: 0, h: 0 };
+  let homParams = [];
   let barierArr = [];
   let barierY = [];
   let niz = false;
@@ -41,29 +40,23 @@ export default function Kolobok(p5, props) {
   scena.layers
     .filter((x) => x.type === "objectgroup")
     .map((x2, i) => {
-      if (x2.name === "Home") {
-        x2.objects.map(
-          (h) => (homParams.x = h.x),
-          (homParams.y = h.y),
-          (homParams.w = h.w),
-          (homParams.h = h.h)
-        );
-      }
       if (x2.name === "kolobok") {
+        props.homeParms.map(
+          (hom) =>
+            (home = Colige(p5).collideRectRect(
+              hom.x,
+              hom.y,
+              hom.width,
+              hom.height,
+              x2.objects[i].x,
+              x2.objects[i].y,
+              x2.objects[i].width,
+              x2.objects[i].height
+            ))
+        );
         props.block.map((block, j) => {
           if (block.type === "zemla") {
             if (block.name === "niz") {
-              home = Colige(p5).collideRectRect(
-                homParams.x,
-                homParams.y,
-                homParams.w,
-                homParams.h,
-                x2.objects[i].x,
-                x2.objects[i].y,
-                x2.objects[i].width,
-                x2.objects[i].height
-              );
-              //console.log()
               niz = Colige(p5).collideRectRect(
                 block.x,
                 block.y,
@@ -94,22 +87,6 @@ export default function Kolobok(p5, props) {
             }
           }
         });
-        ErathMap(p5, {
-          imgErath: props.imgErath,
-          presed: props.presed,
-          presedTop: props.presedTop,
-          direction: props.direction,
-          img1: props.img1,
-          img2: props.img2,
-          img3: props.img3,
-          img5: props.img5,
-          img6: props.img6,
-          img7: props.img7,
-          img8: props.img8,
-          img9: props.img9,
-          img10: props.img10,
-          img11: props.img11
-        });
 
         if (niz) {
           y = x2.objects[i].y = nizY;
@@ -139,7 +116,6 @@ export default function Kolobok(p5, props) {
           img = imgArrInvert[image.imgAnimation.start];
           if (home) {
             x2.objects[i].x = 0;
-            console.log(home);
           } else {
             x = x2.objects[i].x -= speed;
           }
@@ -152,8 +128,7 @@ export default function Kolobok(p5, props) {
           x = x2.objects[i].x;
           y = x2.objects[i].y;
         }
-        if (niz) {
-        }
+
         if (props.presedTop === 3) {
           image.imgAnimation.startJamp += 1;
           if (props.direction === 2) {
@@ -168,19 +143,45 @@ export default function Kolobok(p5, props) {
           } else {
             img = props.imgKolobokJampInvert;
             if (image.imgAnimation.startJamp < image.imgAnimation.jampMax) {
-              x = x2.objects[i].x -= sppedJamp;
-              y = x2.objects[i].y -= sppedJamp;
+              if (home) {
+                x = x2.objects[i].x;
+                y = x2.objects[i].y;
+              } else {
+                x = x2.objects[i].x -= sppedJamp;
+                y = x2.objects[i].y -= sppedJamp;
+              }
             } else {
               x = x2.objects[i].x;
               y = x2.objects[i].y;
             }
           }
         }
+
         w = x2.objects[i].width;
         h = x2.objects[i].height;
         //
       }
     });
-
+  let kolobok = { x: x, y: y, w: w, h: h };
+  Earth(p5, {
+    block: props.block,
+    presedTop: props.presedTop,
+    direction: props.direction,
+    presed: props.presed,
+    kolobok: kolobok
+  });
+  ErathMap(p5, {
+    imgErath: props.imgErath,
+    img1: props.img1,
+    img2: props.img2,
+    img3: props.img3,
+    img5: props.img5,
+    img6: props.img6,
+    img7: props.img7,
+    img8: props.img8,
+    img9: props.img9,
+    img10: props.img10,
+    img11: props.img11
+  });
   p5.image(img, x, y, w, h);
 }

@@ -1,17 +1,11 @@
 import scena from "../db/scena.json";
 import image from "../db/image.json";
+import Earth from "../road/Earth";
 export default function EarthMap(p5, props) {
   let col = 0;
   let row = 0;
-  if (props.presed === 2) {
-    // image.imgMaps.start -= image.imgMaps.speed;
-  }
-  if (props.presed === 1) {
-    // image.imgMaps.start += image.imgMaps.speed;
-  }
 
   p5.background(255);
-
   scena.layers.map((layer) => {
     if (layer.type === "tilelayer") {
       layer.data.map((d, i) => {
