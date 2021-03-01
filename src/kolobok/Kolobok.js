@@ -23,7 +23,11 @@ export default function Kolobok(p5, props) {
     props.imgKolobokFasInvert,
     props.imgKolobokLeftInvert
   ];
-  letimgArrDirect = ["noImage", props.imgKolobokFasInvert, props.imgKolobokFas];
+  let imgArrDirect = [
+    "noImage",
+    props.imgKolobokFasInvert,
+    props.imgKolobokFas
+  ];
   let speed = 2;
   let sppedJamp = 40;
   let countJamp = 0;
@@ -48,16 +52,6 @@ export default function Kolobok(p5, props) {
           x2.objects[i].height
         );
 
-        level = Colige(p5).collideRectRect(
-          settings.x,
-          settings.y,
-          settings.width,
-          settings.height,
-          x2.objects[i].x,
-          x2.objects[i].y,
-          x2.objects[i].width,
-          x2.objects[i].height
-        );
         ErathMap(p5, {
           imgErath: props.imgErath,
           presed: props.presed,
@@ -82,74 +76,42 @@ export default function Kolobok(p5, props) {
           pits: pits,
           goLeft: goLeft
         });
-        Pits(p5, {
-          params: props.pitsParams,
-          presed: props.presed,
-          pits: pits,
-          goLeft: goLeft
-        });
 
         if (x2.objects[i].y < props.kolobokY) {
           props.presed = 0;
         }
         if (props.presed === 2) {
-          presedTop = 0;
+          props.presedTop = 0;
           image.imgAnimation.start += 1;
           if (image.imgAnimation.start === imgArr.length) {
             image.imgAnimation.start = 0;
           }
           p5.frameRate(image.imgAnimation.speed);
 
-          if (pits) {
-            img = props.imgKolobokJamp;
-            x = x2.objects[i].x;
-            y = x2.objects[i].y;
-            w = x2.objects[i].width;
-            h = x2.objects[i].height;
-          } else {
-            img = imgArr[image.imgAnimation.start];
-            x = x2.objects[i].x += speed;
-            y = x2.objects[i].y;
-            w = x2.objects[i].width;
-            h = x2.objects[i].height;
-          }
+          img = imgArr[image.imgAnimation.start];
+          x = x2.objects[i].x += speed;
+          y = x2.objects[i].y;
+          w = x2.objects[i].width;
+          h = x2.objects[i].height;
         }
 
         if (props.presed === 1) {
-          presedTop = 0;
+          props.presedTop = 0;
           image.imgAnimation.start += 1;
           if (image.imgAnimation.start === imgArrInvert.length) {
             image.imgAnimation.start = 0;
           }
           p5.frameRate(image.imgAnimation.speed);
 
-          if (goLeft) {
-            img = imgArrInvert[image.imgAnimation.start];
-            x = x2.objects[i].x;
-            y = x2.objects[i].y;
-            w = x2.objects[i].width;
-            h = x2.objects[i].height;
-          } else {
-            img = imgArrInvert[image.imgAnimation.start];
-            x = x2.objects[i].x -= speed;
-            y = x2.objects[i].y;
-            w = x2.objects[i].width;
-            h = x2.objects[i].height;
-          }
-          if (pits) {
-            img = props.imgKolobokJampInvert;
-          } else {
-            img = imgArrInvert[image.imgAnimation.start];
-          }
-
-          x = x2.objects[i].x;
+          img = imgArrInvert[image.imgAnimation.start];
+          x = x2.objects[i].x -= speed;
           y = x2.objects[i].y;
           w = x2.objects[i].width;
           h = x2.objects[i].height;
         }
 
         if (props.presed === 0 && props.presedTop !== 3) {
-          img = letimgArrDirect[props.direction];
+          img = imgArrDirect[props.direction];
           x = x2.objects[i].x;
           y = x2.objects[i].y;
           w = x2.objects[i].width;
@@ -240,20 +202,6 @@ export default function Kolobok(p5, props) {
         //
       }
     });
-  if (x < 0) {
-    x = 0;
-  }
-  if (level) {
-    settings.x = x;
-    settings.y = y;
-  } else {
-  }
-  Lives(p5, {
-    level: level,
-    test: props.test,
-    x: settings.x,
-    y: settings.y
-  });
 
   p5.image(img, x, y, w, h);
 }
