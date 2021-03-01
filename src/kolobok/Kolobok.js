@@ -7,12 +7,13 @@ import ErathMap from "../road/ErathMap";
 import Colige from "../Colige";
 import settings from "../db/settings.json";
 export default function Kolobok(p5, props) {
-  let goLeft;
-  let pits;
-  let levx = 0;
-  let levY = 0;
-  let barrier;
+  let home = false;
+  let barrier = false;
+  let homParams = { x: 0, y: 0, w: 0, h: 0 };
+  let barierArr = [];
+  let barierY = [];
   let niz = false;
+  let nizY = 0;
   let imgArr = [
     props.imgKolobokFas,
     props.imgKolobokRight,
@@ -32,7 +33,6 @@ export default function Kolobok(p5, props) {
   ];
   let speed = 20;
   let sppedJamp = 40;
-  let countJamp = 0;
   let img = props.imgKolobokFas;
   let x = 0;
   let y = 0;
@@ -41,11 +41,29 @@ export default function Kolobok(p5, props) {
   scena.layers
     .filter((x) => x.type === "objectgroup")
     .map((x2, i) => {
+      if (x2.name === "Home") {
+        x2.objects.map(
+          (h) => (homParams.x = h.x),
+          (homParams.y = h.y),
+          (homParams.w = h.w),
+          (homParams.h = h.h)
+        );
+      }
       if (x2.name === "kolobok") {
-        pits = true;
         props.block.map((block, j) => {
           if (block.type === "zemla") {
             if (block.name === "niz") {
+              home = Colige(p5).collideRectRect(
+                homParams.x,
+                homParams.y,
+                homParams.w,
+                homParams.h,
+                x2.objects[i].x,
+                x2.objects[i].y,
+                x2.objects[i].width,
+                x2.objects[i].height
+              );
+              //console.log()
               niz = Colige(p5).collideRectRect(
                 block.x,
                 block.y,
@@ -56,6 +74,7 @@ export default function Kolobok(p5, props) {
                 x2.objects[i].width,
                 x2.objects[i].height
               );
+              nizY = block.y - block.height;
             }
             if (block.name === "vozv") {
               barrier = Colige(p5).collideRectRect(
@@ -69,7 +88,8 @@ export default function Kolobok(p5, props) {
                 x2.objects[i].height
               );
               if (barrier) {
-                x = x2.objects[i].x = block.x - block.width;
+                barierArr = [barrier];
+                barierY = [block.y - x2.objects[i].height];
               }
             }
           }
@@ -79,7 +99,6 @@ export default function Kolobok(p5, props) {
           presed: props.presed,
           presedTop: props.presedTop,
           direction: props.direction,
-          pits: pits,
           img1: props.img1,
           img2: props.img2,
           img3: props.img3,
@@ -91,43 +110,24 @@ export default function Kolobok(p5, props) {
           img10: props.img10,
           img11: props.img11
         });
-        Home(p5, {
-          params: props.homeParms,
-          pitsParams: props.pitsParams,
-          presed: props.presed,
-          pits: pits,
-          goLeft: goLeft
-        });
+
         if (niz) {
-          y = x2.objects[i].y -= 0;
+          y = x2.objects[i].y = nizY;
         } else {
-          y = x2.objects[i].y += 4;
+          y = x2.objects[i].y += speed;
+        }
+
+        if (barierArr.length > 0) {
+          y = x2.objects[i].y = barierY[0];
         }
         if (props.presed === 2) {
-          console.log(barrier);
-
           image.imgAnimation.start += 1;
           if (image.imgAnimation.start === imgArr.length) {
             image.imgAnimation.start = 0;
           }
           p5.frameRate(image.imgAnimation.speed);
-          /* barrier
-            .filter((f) => f !== undefined)
-            .map((barier) => {
-              if (barier === true) {
-                img = imgArr[image.imgAnimation.start];
-                //x = x2.objects[i].x = -10;
-                y = x2.objects[i].y;
-                w = x2.objects[i].width;
-                h = x2.objects[i].height;
-              } else {
-                
-            });*/
           img = imgArr[image.imgAnimation.start];
           x = x2.objects[i].x += speed;
-          y = x2.objects[i].y;
-          w = x2.objects[i].width;
-          h = x2.objects[i].height;
         }
 
         if (props.presed === 1) {
@@ -136,107 +136,48 @@ export default function Kolobok(p5, props) {
             image.imgAnimation.start = 0;
           }
           p5.frameRate(image.imgAnimation.speed);
-
           img = imgArrInvert[image.imgAnimation.start];
-          x = x2.objects[i].x -= speed;
+          if (home) {
+            x2.objects[i].x = 0;
+            console.log(home);
+          } else {
+            x = x2.objects[i].x -= speed;
+          }
+
           y = x2.objects[i].y;
-          w = x2.objects[i].width;
-          h = x2.objects[i].height;
         }
 
         if (props.presed === 0) {
           img = imgArrDirect[props.direction];
           x = x2.objects[i].x;
           y = x2.objects[i].y;
-          w = x2.objects[i].width;
-          h = x2.objects[i].height;
+        }
+        if (niz) {
         }
         if (props.presedTop === 3) {
-          y = x2.objects[i].y -= sppedJamp;
-        }
-
-        //
-        /*if (props.presedTop === 3) {
           image.imgAnimation.startJamp += 1;
-          if (image.imgAnimation.startJamp > image.imgAnimation.jampMax) {
-            countJamp = 1;
-          }
-          if (image.imgAnimation.startJamp > image.imgAnimation.jampMax + 2) {
-            countJamp = 1.5;
-          }
-          if (x2.objects[i].y > props.kolobokY) {
-            image.imgAnimation.startJamp =
-              image.imgAnimation.jampMax + x2.objects[i].y + 1;
-          }
-          if (
-            image.imgAnimation.startJamp >
-            image.imgAnimation.jampMax + x2.objects[i].y
-          ) {
-            countJamp = 2;
-          }
-          p5.frameRate(image.imgAnimation.speed);
-
           if (props.direction === 2) {
-            if (countJamp === 0 && props.presed < 1) {
-              img = props.imgKolobokJamp;
+            img = props.imgKolobokJamp;
+            if (image.imgAnimation.startJamp < image.imgAnimation.jampMax) {
               x = x2.objects[i].x += sppedJamp;
               y = x2.objects[i].y -= sppedJamp;
-              w = x2.objects[i].width;
-              h = x2.objects[i].height;
-            }
-            if (countJamp === 1 && props.presed < 1) {
-              img = props.imgKolobokJamp;
-              x = x2.objects[i].x += sppedJamp;
-              y = x2.objects[i].y;
-              w = x2.objects[i].width;
-              h = x2.objects[i].height;
-            }
-            if (countJamp === 1.5 && props.presed < 1) {
-              img = props.imgKolobokJamp;
-              x = x2.objects[i].x += sppedJamp;
-              y = x2.objects[i].y += sppedJamp;
-              w = x2.objects[i].width;
-              h = x2.objects[i].height;
-            }
-            if (countJamp === 2 && props.presed < 1) {
-              img = props.imgKolobokFas;
+            } else {
               x = x2.objects[i].x;
-              y = x2.objects[i].y = props.kolobokY;
-              w = x2.objects[i].width;
-              h = x2.objects[i].height;
+              y = x2.objects[i].y;
             }
           } else {
-            if (countJamp === 0 && props.presed < 1) {
-              img = props.imgKolobokJampInvert;
+            img = props.imgKolobokJampInvert;
+            if (image.imgAnimation.startJamp < image.imgAnimation.jampMax) {
               x = x2.objects[i].x -= sppedJamp;
               y = x2.objects[i].y -= sppedJamp;
-              w = x2.objects[i].width;
-              h = x2.objects[i].height;
-            }
-            if (countJamp === 1 && props.presed < 1) {
-              img = props.imgKolobokJampInvert;
-              x = x2.objects[i].x -= sppedJamp;
-              y = x2.objects[i].y;
-              w = x2.objects[i].width;
-              h = x2.objects[i].height;
-            }
-            if (countJamp === 1.5 && props.presed < 1) {
-              img = props.imgKolobokJampInvert;
-              x = x2.objects[i].x -= sppedJamp;
-              y = x2.objects[i].y += sppedJamp;
-              w = x2.objects[i].width;
-              h = x2.objects[i].height;
-            }
-            if (countJamp === 2 && props.presed < 1) {
-              img = props.imgKolobokFasInvert;
+            } else {
               x = x2.objects[i].x;
-              y = x2.objects[i].y = props.kolobokY;
-              w = x2.objects[i].width;
-              h = x2.objects[i].height;
+              y = x2.objects[i].y;
             }
           }
-        }*/
-
+        }
+        w = x2.objects[i].width;
+        h = x2.objects[i].height;
         //
       }
     });

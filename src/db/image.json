@@ -4,7 +4,8 @@
     "count": 3,
     "start": 0,
     "startJamp": 0,
-    "jampMax": 5
+    "jampMax": 8,
+    "countPress": 0
   },
   "imgMaps": {
     "speed": 40,

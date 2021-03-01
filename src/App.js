@@ -40,7 +40,7 @@ export default function App() {
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/gBkC-scena.png"
     );
     imgKolobokFas = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/Tftn-kolobokFas.png"
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/Wt_E-kolobokFas.png"
     );
     imgKolobokLeft = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/Bjz--kolobokLeft.png"
@@ -113,29 +113,6 @@ export default function App() {
     );
 
     scena.layers
-      .filter((x) => x.type === "objectgroup")
-      .map((x2, i) => {
-        if (x2.name === "kolobok") {
-          kolobokY = x2.objects[i].y;
-        }
-      });
-
-    scena.layers
-      .filter((x) => x.name === "Home")
-      .map((x2) =>
-        x2.objects
-          .filter((x3) => x3.name === "home")
-          .map((x4) => {
-            homeParms = {
-              x: x4.x,
-              y: x4.y,
-              width: x4.width,
-              height: x4.height
-            };
-          })
-      );
-
-    scena.layers
       .filter((x) => x.name === "block")
       .map((x2) => (block = x2.objects));
   };
@@ -162,7 +139,6 @@ export default function App() {
       spedKadr: spedKadr,
       direction: direction,
       kolobokY: kolobokY,
-      homeParms: homeParms,
       pitsParams: pitsParams,
       test: test,
       c: c,
@@ -191,7 +167,7 @@ export default function App() {
     }
     if (p5.keyCode === 38) {
       presedTop = 3;
-      image.imgAnimation.startJamp = 0;
+
       presed = 0;
     }
   };
@@ -202,7 +178,10 @@ export default function App() {
       presed = 0;
     }
     if (p5.keyCode === 38) {
-      presedTopUp = 0;
+      image.imgAnimation.startJamp = 0;
+
+      presed = 0;
+      presedTop = 0;
     }
   };
   return (
