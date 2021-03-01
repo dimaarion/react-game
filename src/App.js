@@ -5,7 +5,6 @@ import scena from "./db/scena.json";
 import image from "./db/image.json";
 import settings from "./db/settings.json";
 import Home from "./barrier/Home";
-import Pits from "./barrier/Pits";
 import Colige from "./Colige";
 import { kolobokGoRight } from "./action";
 export default function App() {
@@ -115,6 +114,9 @@ export default function App() {
     scena.layers
       .filter((x) => x.name === "block")
       .map((x2) => (block = x2.objects));
+    scena.layers
+      .filter((x) => x.name === "Home")
+      .map((x2) => (homeParms = x2.objects));
   };
 
   let speed = 0;
@@ -139,7 +141,7 @@ export default function App() {
       spedKadr: spedKadr,
       direction: direction,
       kolobokY: kolobokY,
-      pitsParams: pitsParams,
+      homeParms: homeParms,
       test: test,
       c: c,
       img1: img1,
