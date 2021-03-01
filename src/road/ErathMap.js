@@ -19,13 +19,76 @@ export default function EarthMap(p5, props) {
     if (layer.type === "tilelayer") {
       layer.data.map((d, i) => {
         if (d > 0) {
-          if (d === 1) {
+          if (d === 433) {
             p5.image(
-              props.imgErath,
+              props.img1,
               col * scena.tilewidth + image.imgMaps.start,
               row * scena.tileheight,
-              scena.tilewidth * 40,
-              scena.tileheight * scena.height
+              scena.tilewidth,
+              scena.tileheight
+            );
+          }
+          if (d === 434) {
+            p5.image(
+              props.img2,
+              col * scena.tilewidth + image.imgMaps.start,
+              row * scena.tileheight,
+              scena.tilewidth,
+              scena.tileheight
+            );
+          }
+          if (d === 435) {
+            p5.image(
+              props.img3,
+              col * scena.tilewidth + image.imgMaps.start,
+              row * scena.tileheight,
+              scena.tilewidth,
+              scena.tileheight
+            );
+          }
+          if (d === 447) {
+            p5.image(
+              props.img8,
+              col * scena.tilewidth + image.imgMaps.start,
+              row * scena.tileheight,
+              scena.tilewidth,
+              scena.tileheight
+            );
+          }
+          if (d === 436) {
+            p5.image(
+              props.img4,
+              col * scena.tilewidth + image.imgMaps.start,
+              row * scena.tileheight,
+              scena.tilewidth,
+              scena.tileheight
+            );
+          }
+          if (d === 437) {
+            p5.image(
+              props.img5,
+              col * scena.tilewidth + image.imgMaps.start,
+              row * scena.tileheight,
+              scena.tilewidth,
+              scena.tileheight
+            );
+          }
+          if (d === 445) {
+            p5.image(
+              props.img6,
+              col * scena.tilewidth + image.imgMaps.start,
+              row * scena.tileheight,
+              scena.tilewidth,
+              scena.tileheight
+            );
+          }
+          if (d === 445) {
+            p5.image(
+              props.img7,
+              col * scena.tilewidth + image.imgMaps.start,
+              row * scena.tileheight,
+              scena.tilewidth,
+              scena.tileheight
             );
           }
         }

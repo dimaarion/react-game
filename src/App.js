@@ -20,7 +20,17 @@ export default function App() {
     imgKolobokRightInvert,
     kolobokY,
     homeParms,
-    pitsParams;
+    pitsParams,
+    img1,
+    img2,
+    img3,
+    img5,
+    img6,
+    img7,
+    img8,
+    img9,
+    img10,
+    img4;
   let test = 0;
   let c = 0;
   const preload = (p5) => {
@@ -28,7 +38,7 @@ export default function App() {
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/gBkC-scena.png"
     );
     imgKolobokFas = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/4mNG-kolobokFas.png"
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/Tftn-kolobokFas.png"
     );
     imgKolobokLeft = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/Bjz--kolobokLeft.png"
@@ -51,6 +61,36 @@ export default function App() {
     imgKolobokJampInvert = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/uWKu-koloborJampInvert.png"
     );
+    img1 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/nNDX-1.png"
+    );
+    img2 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/_dpt-2.png"
+    );
+    img3 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/xOJf-3.png"
+    );
+    img4 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/7eca-4.png"
+    );
+    img5 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/G67X-5.png"
+    );
+    img6 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/LgiT-6.png"
+    );
+    img7 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/cjqE-7.png"
+    );
+    img8 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/9GMj-8.png"
+    );
+    img9 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/lZ-V-9.png"
+    );
+    img10 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/um27-10.png"
+    );
   };
   const props = {
     scena: scena,
@@ -66,7 +106,7 @@ export default function App() {
       imgKolobokFas: imgKolobokFas,
       imgKolobokLeft: imgKolobokLeft
     };
-    p5.createCanvas(p5.windowWidth, scena.height * scena.tileheight).parent(
+    p5.createCanvas(p5.windowWidth - 25, p5.windowHeight - 25).parent(
       canvasParentRef
     );
 
@@ -138,7 +178,17 @@ export default function App() {
       homeParms: homeParms,
       pitsParams: pitsParams,
       test: test,
-      c: c
+      c: c,
+      img1: img1,
+      img2: img2,
+      img3: img3,
+      img5: img5,
+      img6: img6,
+      img7: img7,
+      img8: img8,
+      img9: img9,
+      img10: img10,
+      img4: img4
     });
   };
   const keyPressed = (p5) => {

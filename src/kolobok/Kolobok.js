@@ -36,16 +36,7 @@ export default function Kolobok(p5, props) {
     .filter((x) => x.type === "objectgroup")
     .map((x2, i) => {
       if (x2.name === "kolobok") {
-        pits = Colige(p5).collideRectRect(
-          props.pitsParams.x,
-          props.pitsParams.y,
-          props.pitsParams.width,
-          props.pitsParams.height,
-          x2.objects[i].x,
-          x2.objects[i].y,
-          x2.objects[i].width,
-          x2.objects[i].height
-        );
+        pits = true;
         goLeft = Colige(p5).collideRectRect(
           props.homeParms.x,
           props.homeParms.y,
@@ -72,7 +63,17 @@ export default function Kolobok(p5, props) {
           presed: props.presed,
           presedTop: props.presedTop,
           direction: props.direction,
-          pits: pits
+          pits: pits,
+          img1: props.img1,
+          img2: props.img2,
+          img3: props.img3,
+          img5: props.img5,
+          img6: props.img6,
+          img7: props.img7,
+          img8: props.img8,
+          img9: props.img9,
+          img10: props.img10,
+          img4: props.img4
         });
         Home(p5, {
           params: props.homeParms,
@@ -246,8 +247,6 @@ export default function Kolobok(p5, props) {
     settings.x = x;
     settings.y = y;
   } else {
-    settings.x = props.pitsParams.x;
-    settings.y = props.pitsParams.y;
   }
   Lives(p5, {
     level: level,
