@@ -4,13 +4,10 @@ export default function EarthMap(p5, props) {
   let col = 0;
   let row = 0;
   if (props.presed === 2) {
-    image.imgMaps.start -= image.imgMaps.speed;
+    // image.imgMaps.start -= image.imgMaps.speed;
   }
   if (props.presed === 1) {
-    image.imgMaps.start += image.imgMaps.speed;
-    if (image.imgMaps.start > 0 || props.goLeft) {
-      image.imgMaps.start = 0;
-    }
+    // image.imgMaps.start += image.imgMaps.speed;
   }
 
   p5.background(255);
@@ -19,7 +16,7 @@ export default function EarthMap(p5, props) {
     if (layer.type === "tilelayer") {
       layer.data.map((d, i) => {
         if (d > 0) {
-          if (d === 433) {
+          if (d === 2) {
             p5.image(
               props.img1,
               col * scena.tilewidth + image.imgMaps.start,
@@ -28,7 +25,7 @@ export default function EarthMap(p5, props) {
               scena.tileheight
             );
           }
-          if (d === 434) {
+          if (d === 1) {
             p5.image(
               props.img2,
               col * scena.tilewidth + image.imgMaps.start,
@@ -37,7 +34,7 @@ export default function EarthMap(p5, props) {
               scena.tileheight
             );
           }
-          if (d === 435) {
+          if (d === 3) {
             p5.image(
               props.img3,
               col * scena.tilewidth + image.imgMaps.start,
@@ -46,22 +43,22 @@ export default function EarthMap(p5, props) {
               scena.tileheight
             );
           }
-          if (d === 447) {
+          if (d === 11) {
             p5.image(
-              props.img8,
+              props.img11,
               col * scena.tilewidth + image.imgMaps.start,
               row * scena.tileheight,
               scena.tilewidth,
               scena.tileheight
             );
           }
-          if (d === 436) {
+          /*if (d === 436) {
             p5.image(
               props.img4,
               col * scena.tilewidth + image.imgMaps.start,
               row * scena.tileheight,
-              scena.tilewidth,
-              scena.tileheight
+              scena.tilewidth /2,
+              scena.tileheight/2
             );
           }
           if (d === 437) {
@@ -69,8 +66,8 @@ export default function EarthMap(p5, props) {
               props.img5,
               col * scena.tilewidth + image.imgMaps.start,
               row * scena.tileheight,
-              scena.tilewidth,
-              scena.tileheight
+              scena.tilewidth /2,
+              scena.tileheight/2
             );
           }
           if (d === 445) {
@@ -78,8 +75,8 @@ export default function EarthMap(p5, props) {
               props.img6,
               col * scena.tilewidth + image.imgMaps.start,
               row * scena.tileheight,
-              scena.tilewidth,
-              scena.tileheight
+              scena.tilewidth /2,
+              scena.tileheight/2
             );
           }
           if (d === 445) {
@@ -87,10 +84,10 @@ export default function EarthMap(p5, props) {
               props.img7,
               col * scena.tilewidth + image.imgMaps.start,
               row * scena.tileheight,
-              scena.tilewidth,
-              scena.tileheight
+              scena.tilewidth /2,
+              scena.tileheight/2
             );
-          }
+          }*/
         }
         col++;
         if (col > scena.width - 1) {

@@ -30,7 +30,9 @@ export default function App() {
     img8,
     img9,
     img10,
-    img4;
+    presedTopUp,
+    block,
+    img11;
   let test = 0;
   let c = 0;
   const preload = (p5) => {
@@ -62,18 +64,18 @@ export default function App() {
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/uWKu-koloborJampInvert.png"
     );
     img1 = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/nNDX-1.png"
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/BGo6-1.png"
     );
     img2 = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/_dpt-2.png"
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/o65_-2.png"
     );
     img3 = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/xOJf-3.png"
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/olj2-3.png"
     );
-    img4 = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/7eca-4.png"
+    img11 = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/IN6M-11.png"
     );
-    img5 = p5.loadImage(
+    /*img5 = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/G67X-5.png"
     );
     img6 = p5.loadImage(
@@ -90,7 +92,7 @@ export default function App() {
     );
     img10 = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/um27-10.png"
-    );
+    );*/
   };
   const props = {
     scena: scena,
@@ -134,23 +136,8 @@ export default function App() {
       );
 
     scena.layers
-      .filter((x) => x.name === "Pits")
-      .map((x2) =>
-        x2.objects
-          .filter((x3) => x3.name === "pits")
-          .map((x4) => {
-            pitsParams = {
-              x: x4.x,
-              y: x4.y,
-              width: x4.width,
-              height: x4.height
-            };
-            settings.x = x4.x;
-            settings.y = x4.y;
-
-            image.barier.map((b) => (b.name === "puddle" ? (b.x = x4.x) : ""));
-          })
-      );
+      .filter((x) => x.name === "block")
+      .map((x2) => (block = x2.objects));
   };
 
   let speed = 0;
@@ -188,7 +175,8 @@ export default function App() {
       img8: img8,
       img9: img9,
       img10: img10,
-      img4: img4
+      img11: img11,
+      block: block
     });
   };
   const keyPressed = (p5) => {
