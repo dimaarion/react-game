@@ -31,7 +31,8 @@ export default function App() {
     img10,
     presedTopUp,
     block,
-    img11;
+    img11,
+    imgEj;
   let test = 0;
   let c = 0;
   const preload = (p5) => {
@@ -74,10 +75,10 @@ export default function App() {
     img11 = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/IN6M-11.png"
     );
-    /*img5 = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/G67X-5.png"
+    imgEj = p5.loadImage(
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/h_se-ej.png"
     );
-    img6 = p5.loadImage(
+    /*img6 = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/LgiT-6.png"
     );
     img7 = p5.loadImage(
@@ -154,7 +155,8 @@ export default function App() {
       img9: img9,
       img10: img10,
       img11: img11,
-      block: block
+      block: block,
+      imgEj: imgEj
     });
   };
   const keyPressed = (p5) => {
