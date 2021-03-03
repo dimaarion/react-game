@@ -3,10 +3,11 @@ import Sketch from "react-p5";
 import kolobok from "./kolobok/Kolobok";
 import scena from "./db/scena.json";
 import image from "./db/image.json";
-import settings from "./db/settings.json";
+import Monster from "./monster/Monster";
+import Barrier from "./barrier/Barrier";
 import Home from "./barrier/Home";
 import Colige from "./Colige";
-import { kolobokGoRight } from "./action";
+import { params } from "./action";
 export default function App() {
   let imgErath,
     imgKolobokFas,
@@ -33,8 +34,11 @@ export default function App() {
     block,
     img11,
     imgEj;
-  let test = 0;
-  let c = 0;
+  let presed = 0;
+  let presedTop = 0;
+  let spedKadr = 0;
+  let direction = 2;
+
   const preload = (p5) => {
     imgErath = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/gBkC-scena.png"
@@ -94,20 +98,8 @@ export default function App() {
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/um27-10.png"
     );*/
   };
-  const props = {
-    scena: scena,
-    imgErath: imgErath,
-    imgKolobokFas: imgKolobokFas,
-    presed: 0
-  };
+
   const setup = (p5, canvasParentRef) => {
-    const propsStart = {
-      p5: p5,
-      scena: scena,
-      imgErath: imgErath,
-      imgKolobokFas: imgKolobokFas,
-      imgKolobokLeft: imgKolobokLeft
-    };
     p5.createCanvas(p5.windowWidth - 25, p5.windowHeight - 25).parent(
       canvasParentRef
     );
@@ -118,15 +110,32 @@ export default function App() {
     scena.layers
       .filter((x) => x.name === "Home")
       .map((x2) => (homeParms = x2.objects));
+    Monster(p5, {
+      imgEj: imgEj,
+      scena: scena,
+      block: block,
+      presed: presed
+    });
   };
-
-  let speed = 0;
-  let presed = 0;
-  let presedTop = 0;
-  let spedKadr = 0;
-  let direction = 2;
-
+  let stop = false;
+  let stopMax = false;
+  let widthMap = scena.tilewidth * scena.width;
   const draw = (p5) => {
+    if (presed === 2) {
+      params.maps.start -= params.maps.speed;
+    }
+    if (presed === 1) {
+      params.maps.start += params.maps.speed;
+    }
+    if (params.maps.start > 0) {
+      stop = true;
+      params.maps.start = 0;
+    }
+
+    if (params.maps.start < -scena.tilewidth * scena.width + p5.windowWidth) {
+      stopMax = true;
+      params.maps.start = -scena.tilewidth * scena.width + p5.windowWidth;
+    }
     kolobok(p5, {
       imgKolobokFas: imgKolobokFas,
       imgKolobokLeft: imgKolobokLeft,
@@ -143,8 +152,6 @@ export default function App() {
       direction: direction,
       kolobokY: kolobokY,
       homeParms: homeParms,
-      test: test,
-      c: c,
       img1: img1,
       img2: img2,
       img3: img3,
@@ -157,6 +164,22 @@ export default function App() {
       img11: img11,
       block: block,
       imgEj: imgEj
+    });
+    Monster(p5, {
+      imgEj: imgEj,
+      scena: scena,
+      block: block,
+      presed: presed,
+      stop: stop,
+      stopMax: stopMax,
+      start: params.maps.start
+    });
+    Barrier(p5, {
+      stop: stop,
+      stopMax: stopMax,
+      presed: presed,
+      block: block,
+      start: params.maps.start
     });
   };
   const keyPressed = (p5) => {

@@ -162,10 +162,7 @@ export default function Kolobok(p5, props) {
       }
     });
   let kolobok = { x: x, y: y, w: w, h: h };
-  Monster(p5, {
-    imgEj: props.imgEj,
-    scena: scena
-  });
+
   Earth(p5, {
     block: props.block,
     presedTop: props.presedTop,

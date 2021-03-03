@@ -16,3 +16,13 @@ export const newArrayDrav = (arr, params) => {
   }
   return a;
 };
+
+export const params = {
+  monster: {
+    speed: 5
+  },
+  maps: {
+    speed: 10,
+    start: 0
+  }
+};

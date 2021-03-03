@@ -20,11 +20,4 @@ export default function Earth(p5, props) {
     stopMax = true;
     image.imgMaps.start = -scena.tilewidth * scena.width + p5.windowWidth;
   }
-
-  Barrier(p5, {
-    stop: stop,
-    stopMax: stopMax,
-    presed: props.presed,
-    block: props.block
-  });
 }

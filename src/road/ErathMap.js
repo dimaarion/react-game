@@ -1,5 +1,6 @@
 import scena from "../db/scena.json";
 import image from "../db/image.json";
+import { params } from "../action";
 import Earth from "../road/Earth";
 export default function EarthMap(p5, props) {
   let col = 0;
@@ -13,7 +14,7 @@ export default function EarthMap(p5, props) {
           if (d === 2) {
             p5.image(
               props.img1,
-              col * props.scena.tilewidth + image.imgMaps.start,
+              col * props.scena.tilewidth + params.maps.start,
               row * props.scena.tileheight,
               props.scena.tilewidth,
               props.scena.tileheight
@@ -22,7 +23,7 @@ export default function EarthMap(p5, props) {
           if (d === 1) {
             p5.image(
               props.img2,
-              col * props.scena.tilewidth + image.imgMaps.start,
+              col * props.scena.tilewidth + params.maps.start,
               row * props.scena.tileheight,
               props.scena.tilewidth,
               props.scena.tileheight
@@ -31,7 +32,7 @@ export default function EarthMap(p5, props) {
           if (d === 3) {
             p5.image(
               props.img3,
-              col * props.scena.tilewidth + image.imgMaps.start,
+              col * props.scena.tilewidth + params.maps.start,
               row * props.scena.tileheight,
               props.scena.tilewidth,
               props.scena.tileheight
@@ -40,7 +41,7 @@ export default function EarthMap(p5, props) {
           if (d === 11) {
             p5.image(
               props.img11,
-              col * props.scena.tilewidth + image.imgMaps.start,
+              col * props.scena.tilewidth + params.maps.start,
               row * props.scena.tileheight,
               props.scena.tilewidth,
               props.scena.tileheight
