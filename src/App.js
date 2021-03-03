@@ -6,6 +6,7 @@ import image from "./db/image.json";
 import Monster from "./monster/Monster";
 import Barrier from "./barrier/Barrier";
 import ErathMap from "./road/ErathMap";
+import Ej from "./monster/Ej";
 import { params, arrayVozv } from "./action";
 export default function App() {
   let imgErath,
@@ -65,7 +66,7 @@ export default function App() {
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/uWKu-koloborJampInvert.png"
     );
     img1 = p5.loadImage(
-      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/BGo6-1.png"
+      "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/XLYs-bakgraund.png"
     );
     img2 = p5.loadImage(
       "https://uploads.codesandbox.io/uploads/user/f0ec9a1a-dbb6-4f1c-875a-49dd16e23056/o65_-2.png"
@@ -181,6 +182,11 @@ export default function App() {
       stopMax: stopMax,
       presed: presed,
       block: block,
+      start: params.maps.start
+    });
+    Ej(p5, {
+      imgEj: imgEj,
+      scena: scena,
       start: params.maps.start
     });
   };

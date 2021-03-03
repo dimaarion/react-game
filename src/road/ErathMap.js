@@ -11,40 +11,13 @@ export default function EarthMap(p5, props) {
     if (layer.type === "tilelayer") {
       layer.data.map((d, i) => {
         if (d > 0) {
-          if (d === 2) {
+          if (d === 101) {
             p5.image(
               props.img1,
               col * props.scena.tilewidth + params.maps.start,
               row * props.scena.tileheight,
-              props.scena.tilewidth,
-              props.scena.tileheight
-            );
-          }
-          if (d === 1) {
-            p5.image(
-              props.img2,
-              col * props.scena.tilewidth + params.maps.start,
-              row * props.scena.tileheight,
-              props.scena.tilewidth,
-              props.scena.tileheight
-            );
-          }
-          if (d === 3) {
-            p5.image(
-              props.img3,
-              col * props.scena.tilewidth + params.maps.start,
-              row * props.scena.tileheight,
-              props.scena.tilewidth,
-              props.scena.tileheight
-            );
-          }
-          if (d === 11) {
-            p5.image(
-              props.img11,
-              col * props.scena.tilewidth + params.maps.start,
-              row * props.scena.tileheight,
-              props.scena.tilewidth,
-              props.scena.tileheight
+              1251,
+              800
             );
           }
         }

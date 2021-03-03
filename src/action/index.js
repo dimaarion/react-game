@@ -18,11 +18,30 @@ export const newArrayDrav = (arr, params) => {
 };
 
 export const params = {
-  monster: {
+  kolobok: {
     speed: 5
   },
+  monster: {
+    speed: 8
+  },
   maps: {
-    speed: 10,
+    speed: 2,
     start: 0
   }
 };
+
+export const arrayVozv = (scena) => {
+  let arr = [{}];
+  scena.layers
+    .filter((x) => x.name === "block")
+    .map((x2) =>
+      x2.objects.map((x3, i) => {
+        if (x3.name === "vozv") {
+          arr[i - 1] = { x: x3.x, y: x3.y, w: x3.width, h: x3.height };
+        }
+      })
+    );
+  return arr;
+};
+
+export const arrCollizion = (p) => {};

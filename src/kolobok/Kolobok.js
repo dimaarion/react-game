@@ -8,7 +8,7 @@ export default function Kolobok(p5, props) {
   let barierArr = [];
   let barierY = [];
   let niz = false;
-  let nizY = 0;
+  let nizY = [];
   let imgArr = [
     props.imgKolobokFas,
     props.imgKolobokRight,
@@ -27,7 +27,7 @@ export default function Kolobok(p5, props) {
     props.imgKolobokFas
   ];
   let speed = 20;
-  let sppedJamp = 40;
+  let sppedJamp = 10;
   let img = props.imgKolobokFas;
   let x = 0;
   let y = 0;
@@ -51,44 +51,29 @@ export default function Kolobok(p5, props) {
                   ko.width,
                   ko.height
                 );
-                nizY = block.y - block.height;
-              }
-
-              if (block.name === "vozv") {
-                barrier = Colige(p5).collideRectRect(
-                  block.x,
-                  block.y,
-                  block.width,
-                  block.height,
-                  ko.x,
-                  ko.y,
-                  ko.width,
-                  ko.height
-                );
-                if (barrier) {
-                  barierArr = [barrier];
-                  barierY = [block.y - ko.height];
-                }
+                nizY = [block.y - 70];
               }
             }
           });
           if (niz) {
-            y = ko.y = nizY;
+            y = ko.y = nizY[0];
           } else {
-            y = ko.y += speed;
+            y = ko.y += params.kolobok.speed;
           }
           if (barierArr.length > 0) {
             y = ko.y = barierY[0];
           }
           if (props.presed === 2) {
             image.imgAnimation.start += 1;
+
             if (image.imgAnimation.start === imgArr.length) {
               image.imgAnimation.start = 0;
             }
 
             img = imgArr[image.imgAnimation.start];
-            x = ko.x += speed;
+            x = ko.x += params.kolobok.speed;
           }
+
           if (props.presed === 1) {
             image.imgAnimation.start += 1;
             if (image.imgAnimation.start === imgArrInvert.length) {
@@ -99,7 +84,7 @@ export default function Kolobok(p5, props) {
             if (home) {
               ko.x = 0;
             } else {
-              x = ko.x -= speed;
+              x = ko.x -= params.kolobok.speed;
             }
 
             y = ko.y;
@@ -113,23 +98,33 @@ export default function Kolobok(p5, props) {
             image.imgAnimation.startJamp += 1;
             if (props.direction === 2) {
               img = props.imgKolobokJamp;
-              if (image.imgAnimation.startJamp < image.imgAnimation.jampMax) {
+              if (
+                image.imgAnimation.startJamp <
+                image.imgAnimation.jampMax / 2
+              ) {
                 x = ko.x += sppedJamp;
                 y = ko.y -= sppedJamp;
+              } else if (
+                image.imgAnimation.startJamp < image.imgAnimation.jampMax
+              ) {
+                x = ko.x += sppedJamp;
+                y = ko.y;
               } else {
                 x = ko.x;
                 y = ko.y;
               }
             } else {
               img = props.imgKolobokJampInvert;
-              if (image.imgAnimation.startJamp < image.imgAnimation.jampMax) {
-                if (home) {
-                  x = ko.x;
-                  y = ko.y;
-                } else {
-                  x = ko.x -= sppedJamp;
-                  y = ko.y -= sppedJamp;
-                }
+              if (
+                image.imgAnimation.startJamp <
+                image.imgAnimation.jampMax / 2
+              ) {
+                x = ko.x -= sppedJamp;
+                y = ko.y -= sppedJamp;
+              } else if (
+                image.imgAnimation.startJamp < image.imgAnimation.jampMax
+              ) {
+                x = ko.x -= sppedJamp;
               } else {
                 x = ko.x;
                 y = ko.y;
