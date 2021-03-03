@@ -1,7 +1,7 @@
 import scena from "../db/scena.json";
 import image from "../db/image.json";
 import { params } from "../action";
-import Earth from "../road/Earth";
+
 export default function EarthMap(p5, props) {
   let col = 0;
   let row = 0;

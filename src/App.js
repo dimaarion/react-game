@@ -5,9 +5,8 @@ import scena from "./db/scena.json";
 import image from "./db/image.json";
 import Monster from "./monster/Monster";
 import Barrier from "./barrier/Barrier";
-import Home from "./barrier/Home";
-import Colige from "./Colige";
-import { params } from "./action";
+import ErathMap from "./road/ErathMap";
+import { params, arrayVozv } from "./action";
 export default function App() {
   let imgErath,
     imgKolobokFas,
@@ -20,7 +19,6 @@ export default function App() {
     imgKolobokRightInvert,
     kolobokY,
     homeParms,
-    pitsParams,
     img1,
     img2,
     img3,
@@ -30,7 +28,6 @@ export default function App() {
     img8,
     img9,
     img10,
-    presedTopUp,
     block,
     img11,
     imgEj;
@@ -119,7 +116,6 @@ export default function App() {
   };
   let stop = false;
   let stopMax = false;
-  let widthMap = scena.tilewidth * scena.width;
   const draw = (p5) => {
     if (presed === 2) {
       params.maps.start -= params.maps.speed;
@@ -136,6 +132,21 @@ export default function App() {
       stopMax = true;
       params.maps.start = -scena.tilewidth * scena.width + p5.windowWidth;
     }
+
+    ErathMap(p5, {
+      scena: scena,
+      imgErath: imgErath,
+      img1: img1,
+      img2: img2,
+      img3: img3,
+      img5: img5,
+      img6: img6,
+      img7: img7,
+      img8: img8,
+      img9: img9,
+      img10: img10,
+      img11: img11
+    });
     kolobok(p5, {
       imgKolobokFas: imgKolobokFas,
       imgKolobokLeft: imgKolobokLeft,
@@ -152,16 +163,6 @@ export default function App() {
       direction: direction,
       kolobokY: kolobokY,
       homeParms: homeParms,
-      img1: img1,
-      img2: img2,
-      img3: img3,
-      img5: img5,
-      img6: img6,
-      img7: img7,
-      img8: img8,
-      img9: img9,
-      img10: img10,
-      img11: img11,
       block: block,
       imgEj: imgEj
     });
@@ -175,6 +176,7 @@ export default function App() {
       start: params.maps.start
     });
     Barrier(p5, {
+      scena: scena,
       stop: stop,
       stopMax: stopMax,
       presed: presed,

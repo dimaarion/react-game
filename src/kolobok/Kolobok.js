@@ -1,14 +1,10 @@
 import scena from "../db/scena.json";
 import image from "../db/image.json";
-import Earth from "../road/Earth";
-import Monster from "../monster/Monster";
-import ErathMap from "../road/ErathMap";
 import Colige from "../Colige";
-import settings from "../db/settings.json";
+import { params, arrayVozv } from "../action";
 export default function Kolobok(p5, props) {
   let home = false;
   let barrier = false;
-  let homParams = [];
   let barierArr = [];
   let barierY = [];
   let niz = false;
@@ -42,21 +38,6 @@ export default function Kolobok(p5, props) {
     .map((x2, i) => {
       if (x2.name === "kolobok") {
         x2.objects.map((ko) => {
-          // блок в начале игры
-          props.homeParms.map(
-            (hom) =>
-              (home = Colige(p5).collideRectRect(
-                hom.x,
-                hom.y,
-                hom.width,
-                hom.height,
-                ko.x,
-                ko.y,
-                ko.width,
-                ko.height
-              ))
-          );
-          // платформа
           props.block.map((block, j) => {
             if (block.type === "zemla") {
               if (block.name === "niz") {
@@ -104,7 +85,7 @@ export default function Kolobok(p5, props) {
             if (image.imgAnimation.start === imgArr.length) {
               image.imgAnimation.start = 0;
             }
-            p5.frameRate(image.imgAnimation.speed);
+
             img = imgArr[image.imgAnimation.start];
             x = ko.x += speed;
           }
@@ -113,7 +94,7 @@ export default function Kolobok(p5, props) {
             if (image.imgAnimation.start === imgArrInvert.length) {
               image.imgAnimation.start = 0;
             }
-            p5.frameRate(image.imgAnimation.speed);
+
             img = imgArrInvert[image.imgAnimation.start];
             if (home) {
               ko.x = 0;
@@ -161,28 +142,6 @@ export default function Kolobok(p5, props) {
         });
       }
     });
-  let kolobok = { x: x, y: y, w: w, h: h };
 
-  Earth(p5, {
-    block: props.block,
-    presedTop: props.presedTop,
-    direction: props.direction,
-    presed: props.presed,
-    kolobok: kolobok
-  });
-  ErathMap(p5, {
-    scena: scena,
-    imgErath: props.imgErath,
-    img1: props.img1,
-    img2: props.img2,
-    img3: props.img3,
-    img5: props.img5,
-    img6: props.img6,
-    img7: props.img7,
-    img8: props.img8,
-    img9: props.img9,
-    img10: props.img10,
-    img11: props.img11
-  });
   p5.image(img, x, y, w, h);
 }
